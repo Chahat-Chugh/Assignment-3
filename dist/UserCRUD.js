@@ -40,7 +40,6 @@ export class UserCRUD {
             deleteBtn.innerHTML = "Delete";
             deleteBtn.addEventListener('click', (e) => this.delete(e));
             deleteBtn.classList.add("dlt");
-            //   deleteBtn.addEventListener('click',() => this.delete(i));
             tr.innerHTML = `<td>${this.users[i].firstName}</td>
                             <td>${this.users[i].middleName}</td>
                             <td>${this.users[i].lastName}</td>
@@ -74,9 +73,12 @@ export class UserCRUD {
             tr.contentEditable = "false";
             targetBtn.innerHTML = "Edit";
             nextSibling.innerHTML = "Delete";
-            // console.log(tr.children);
-            console.log(this.users[index - 1]);
-            console.log(tr.childNodes[4].textContent);
+            this.users[index - 1].firstName = tr.childNodes[0].textContent;
+            this.users[index - 1].middleName = tr.childNodes[2].textContent;
+            this.users[index - 1].lastName = tr.childNodes[4].textContent;
+            this.users[index - 1].email = tr.childNodes[6].textContent;
+            this.users[index - 1].phone_no = tr.childNodes[8].textContent;
+            this.users[index - 1].address = tr.childNodes[12].textContent;
         }
     }
     delete(e) {
