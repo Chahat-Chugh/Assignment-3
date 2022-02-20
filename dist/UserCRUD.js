@@ -33,12 +33,12 @@ export class UserCRUD {
             tr = document.createElement("tr");
             let editBtn = document.createElement("button");
             editBtn.innerHTML = "Edit";
-            editBtn.addEventListener('click', this.update);
+            editBtn.addEventListener('click', (e) => this.update(e));
             editBtn.classList.add("edit");
             let deleteBtn = document.createElement("button");
             deleteBtn = document.createElement("button");
             deleteBtn.innerHTML = "Delete";
-            deleteBtn.addEventListener('click', this.delete);
+            deleteBtn.addEventListener('click', (e) => this.delete(e));
             deleteBtn.classList.add("dlt");
             //   deleteBtn.addEventListener('click',() => this.delete(i));
             tr.innerHTML = `<td>${this.users[i].firstName}</td>
@@ -58,33 +58,39 @@ export class UserCRUD {
     }
     read() {
     }
-    update() {
-        let row = this.parentElement;
-        let nextSibling = this.nextElementSibling;
-        if (this.innerHTML === "Edit") {
-            row.contentEditable = 'true';
-            this.contentEditable = 'false';
-            this.innerHTML = "Save";
+    update(e) {
+        let targetBtn = e.target;
+        let tr = targetBtn.parentElement;
+        let nextSibling = targetBtn.nextElementSibling;
+        let index = tr.rowIndex;
+        if (targetBtn.innerHTML === "Edit") {
+            tr.contentEditable = "true";
+            targetBtn.innerHTML = "Save";
             nextSibling.innerHTML = "Cancel";
+            targetBtn.contentEditable = "false";
+            nextSibling.contentEditable = "false";
         }
         else {
-            row.contentEditable = "false";
-            this.innerHTML = "Edit";
+            tr.contentEditable = "false";
+            targetBtn.innerHTML = "Edit";
             nextSibling.innerHTML = "Delete";
+            // console.log(tr.children);
+            console.log(this.users[index - 1]);
+            console.log(tr.childNodes[4].textContent);
         }
     }
-    delete() {
-        let row = this.parentElement;
-        if (this.innerHTML === "Delete") {
-            row.remove();
+    delete(e) {
+        let targetBtn = e.target;
+        let tr = targetBtn.parentElement;
+        if (targetBtn.innerHTML === "Delete") {
+            tr.remove();
         }
         else {
-            let prevSibling = this.previousElementSibling;
-            this.innerHTML = "Delete";
-            row.contentEditable = "false";
+            tr.contentEditable = "false";
+            targetBtn.innerHTML = "Delete";
+            let prevSibling = targetBtn.previousElementSibling;
             prevSibling.innerHTML = "Edit";
-            let usercrud = new UserCRUD();
-            usercrud.create();
+            this.createTable();
         }
     }
     refresh() {
