@@ -30,7 +30,7 @@ export class UserCRUD implements CRUD
     {
         data.forEach(ob => 
             {
-                this.users.push(new User(ob["First Name"],ob["Middle Name"],ob["Last Name"],ob.Email,ob.Phone,Role.subscriber,ob.Address));
+                this.users.push(new User(ob["First Name"],ob["Middle Name"],ob["Last Name"],ob.Email,ob.Phone,ob.Role,ob.Address));
             }
         )
     }

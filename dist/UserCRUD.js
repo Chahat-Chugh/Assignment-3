@@ -1,6 +1,5 @@
 import { User } from "./User.js";
 import data from "./data.json" assert { type: "json" };
-import { Role } from "./Role.js";
 export class UserCRUD {
     constructor() {
         this.users = [];
@@ -15,7 +14,7 @@ export class UserCRUD {
     }
     addData() {
         data.forEach(ob => {
-            this.users.push(new User(ob["First Name"], ob["Middle Name"], ob["Last Name"], ob.Email, ob.Phone, Role.subscriber, ob.Address));
+            this.users.push(new User(ob["First Name"], ob["Middle Name"], ob["Last Name"], ob.Email, ob.Phone, ob.Role, ob.Address));
         });
     }
     create() {
